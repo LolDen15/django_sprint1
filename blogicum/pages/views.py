@@ -9,4 +9,5 @@ def about(request):
 
 
 def rules(request):
-    return render(request, 'rules.html')
+    template = 'pages/rules.html'
+    return render(request, template)

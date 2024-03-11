@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
+from django.http import Http404
 
 
 posts = [
@@ -47,12 +48,17 @@ posts = [
 
 def index(request):
     template = 'blog/index.html'
-    return render(request, template)
+    return render(request, template, {'posts': reversed(posts)})
 
 
-def post_detail(request):
-    return render(request, 'detail.html')
+def post_detail(request, id_post):
+    template = 'blog/detail.html'
+    good = next((good for good in posts if good['id'] == id_post), None)
+    if not good:
+        raise Http404()
+    return render(request, template, {'post': good})
 
 
-def category_posts(request):
-    return render(request, 'category.html')
+def category_posts(request, category_slug):
+    template = 'blog/category.html'
+    return render(request, template, {'category_slug': category_slug})
