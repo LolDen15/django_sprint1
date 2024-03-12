@@ -58,8 +58,12 @@ def post_detail(request, post_id):
 
     if not dict_posts.get(post_id):
         raise Http404()
-    return render(request, 'blog/detail.html', {'post': dict_posts.get(post_id)})
+    return render(
+        request, 'blog/detail.html', {'post': dict_posts.get(post_id)}
+    )
 
 
 def category_posts(request, category_slug):
-    return render(request, 'blog/category.html', {'category_slug': category_slug})
+    return render(
+        request, 'blog/category.html', {'category_slug': category_slug}
+    )
