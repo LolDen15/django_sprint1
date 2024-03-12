@@ -1,8 +1,10 @@
+from typing import List, Dict, Union
+
 from django.shortcuts import render
 from django.http import Http404
 
 
-posts: list = [
+posts: List[Dict[str, Union[str, int]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -45,9 +47,9 @@ posts: list = [
     },
 ]
 
-dict_posts = {}
+post_by_id = {}
 for post in posts:
-    dict_posts[post['id']] = post
+    post_by_id[post['id']] = post
 
 
 def index(request):
@@ -55,11 +57,11 @@ def index(request):
 
 
 def post_detail(request, post_id):
-
-    if not dict_posts.get(post_id):
+    post_detail_by_id = post_by_id.get(post_id)
+    if not post_detail_by_id:
         raise Http404()
     return render(
-        request, 'blog/detail.html', {'post': dict_posts.get(post_id)}
+        request, 'blog/detail.html', {'post': post_detail_by_id}
     )
 
 
