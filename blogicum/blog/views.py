@@ -1,10 +1,10 @@
-from typing import List, Dict, Union
+from typing import Union
 
 from django.shortcuts import render
 from django.http import Http404
 
 
-posts: List[Dict[str, Union[str, int]]] = [
+posts: list[dict[str, Union[str, int]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
